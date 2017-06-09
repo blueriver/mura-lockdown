@@ -1,0 +1,100 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf820
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+1) configure Apache v-host\
+	configure ssl\
+	remove icons, cgi-bin, errors (any server defaults)\
+	enable htaccess\
+\
+2) configure Lucee\
+	set strong password\
+	configure xmx\
+	restrict outside access via apache or other method\
+\
+3) configure /install MySQL\
+	add db specific user (don't use root)\
+\
+4) configure firewall\
+	web server to only open port 22, 80, 443\
+	database server to only accept connections from web server on port 3306 (ip address restriction)\
+	\
+5) force ssl\
+	set in Mura admin\
+	Apache /.htaccess\
+\
+6) add click jacking header in cfapplication.cfm\
+	<cfheader name="X-Frame-Options" value="SAMEORIGIN">\
+	and in .htaccess\
+	<ifModule mod_headers.c>\
+		Header always append X-Frame-Options SAMEORIGIN\
+	</ifModule>\
+	\
+7) disable access to /default/ folder\
+	add /default/.htaccess\
+		deny from all\
+	\
+8) enable security settings in settings.ini.cfm\
+	securecookies=true\
+	rotatesessions=true\
+	debuggingenabled=false\
+	adminssl=true\
+	errorTemplate=/message/error.cfm\
+	stricthtml=true\
+	allowSimpleHTMLForms=false\
+	scriptProtectExceptions=\
+	fmallowedextensions=7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,ppsx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,xml,zip,m4v,less\
+	fmshowsitefiles=0\
+	fmshowapplicationroot=0\
+	autodiscoverplugins=false\
+	fmallowedextensions=gif,jpeg,jpg,pdf,png\
+	allowedmimetypes=image/gif,image/jpeg,application/pdf,image/png\
+\
+9) disable insecure cookies in cfapplication.cfm\
+	<cfset this.setClientCookies = false>\
+\
+10) add setDynamicContent function override in /default/includes/customHandler and in theme eventHandler\
+	forces the [mura] tag to only run functions already defined in contentRenderer\
+11) add disabled plugin install in /default/includes/customHandler\
+	disable the ability to install plugins\
+\
+12) add error messages in /message/\
+	config in settings.ini.cfm\
+	config in railo admin\
+	config in .htaccess\
+		ErrorDocument 404 /404/\
+		ErrorDocument 500 /tasks/message/error.cfm\
+		ErrorDocument 403 /tasks/message/error.cfm\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\b \cf0 *TESTING*
+\b0 \
+use 
+\i nmap
+\i0  to run a port scan against the web / database server\
+	Web should only show ports 22, 80, 443 open\
+	DB should only show port 22\
+\
+use 
+\i curl -I
+\i0  to test against the webserver.\
+	all cookies should show secure flag, no cookies should be passed insecure\
+	all insecure connections should be immediately redirected to secure (ssl)\
+	look for X-Frame-Options header\
+\
+make sure \
+	Mura admin is fully running on ssl\
+	site errors only show the generic error message page\
+	additional plugins can not be installed\
+	malicious files can not be uploaded, test the allowedmimetypes setting\
+\
+\
+}
