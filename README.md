@@ -111,7 +111,7 @@ Accessed with:
 
 http://domain.com/index.cfm/_api/json/v1/{siteid}/apihelper/heythere
 
-## Environmental Guidlines
+## Configuration Guidlines
 
 ### Server-Side Adjustments
 
