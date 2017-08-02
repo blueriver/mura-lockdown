@@ -93,17 +93,18 @@ The most common example if outputting the body of a content node.
 
 3. It preferred way to add custom endpoint is to add model/bean/apihelper.cfc to your theme, content_type or display object/module directory and add a remote function:
 
-{module_dir}/model/beans/apihelper.cfc
 
-```
-component extends="mura.bean.bean" {
 
-  remote function heyThere(){
-    return "Hello!";
-  }
+	```
+	{module_dir}/model/beans/apihelper.cfc
+	component extends="mura.bean.bean" {
 
-}
-```
+	  remote function heyThere(){
+	    return "Hello!";
+	  }
+
+	}
+	```
 
 Accessed with:
 
