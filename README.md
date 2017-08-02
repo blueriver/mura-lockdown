@@ -113,6 +113,13 @@ http://domain.com/index.cfm/_api/json/v1/{siteid}/apihelper/heythere
 
 ## Configuration Guidlines
 
+### Script Protection Filter
+
+1. Mura has a baked in script protection filter scanning all submitted variables for threats.
+
+2. There is a settings.ini.cfm scriptprotectexceptions attribute that can be used to allow specific variables names to bypass it.
+
+
 ### Server-Side Adjustments
 
 1. Configure Apache v-host
