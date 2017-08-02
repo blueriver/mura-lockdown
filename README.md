@@ -1,12 +1,11 @@
-# mura-lockdown
-
+# Mura CMS Lockdown Recommendations
+Revised June 9, 2017
 This checklist is meant to provide general recommendations for security settings and best practices when "locking down" Mura CMS.
 Server environments will vary, as will security policies, and additional security steps may be required. 
 
-
 ## Coding Guidelines
 
-### SQL QUERIES
+### SQL Queries
 
 Always param all queries variables.
 
@@ -26,13 +25,13 @@ qs.addParam(name="id", cfsqltype="cf_sql_varchar", value="123");
 rs=qs.execute(sql="select * from example where id = :id").getResult();
 ```
 
-## VARIABLE REFERENCES
+## Variable Referencing
 
 Always use used scoped variables (ie. url.myvar NOT myvar).
 
 The only allowed exceptions are for locally scoped variables within functions and the variables scope.
 
-## ESCAPE ALL RENDERED VARIABLES WITH ESAPIENCODE()
+## Escape all dynamically rendered variables
 
 Never directly output a dynamic variables. 
 
@@ -86,7 +85,7 @@ The most common example if outputting the body of a content node.
 </cfoutput>
 ```
 
-## CUSTOM ENDPOINTS
+## Custom Endpoints
 
 When adding custom url endpoints like proxy cfc place them under siteid either named remote.cfc under a directory named remote.  
 This will prevent hackers from exploring urls looking files that were never intended to be directory accessed like includes.
@@ -110,9 +109,6 @@ Accessed with:
 http://domain.com/index.cfm/_api/json/v1/{siteid}/apihelper/heythere
 
 ## Environmental Guidlines
-
-Mura CMS Lockdown Recommendations
-Revised June 9, 2017
 
 ### Server-Side Adjustments
 
