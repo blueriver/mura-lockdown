@@ -4,11 +4,12 @@ This checklist is meant to provide general recommendations for security settings
 Server environments will vary, as will security policies, and additional security steps may be required. 
 
 
-##Security Coding Guidelines
+## Security Coding Guidelines
 
-###SQL QUERIES
+### SQL QUERIES
 
 Always param all queries variables.
+
 ```
 <cfquery name="rs">
   select * from example where id=<cfqueryparam value="123" cfsqltype="cf_sql_varchar">
@@ -25,17 +26,17 @@ qs.addParam(name="id", cfsqltype="cf_sql_varchar", value="123");
 rs=qs.execute(sql="select * from example where id = :id").getResult();
 ```
 
-##VARIABLE REFERENCES
+## VARIABLE REFERENCES
 
 Always use used scoped variables (ie. url.myvar NOT myvar).
 
 The only allowed exceptions are for locally scoped variables within functions and the variables scope.
 
-##ESCAPE ALL RENDERED VARIABLES WITH ESAPIENCODE()
+## ESCAPE ALL RENDERED VARIABLES WITH ESAPIENCODE()
 
 Never directly output a dynamic variables. 
 
-###DO
+### DO
 
 ```
 <cfoutput>
@@ -51,9 +52,10 @@ Never directly output a dynamic variables.
 </script>
 
 </cfoutput>
-``
+```
 
-###NOT!
+### NOT!
+
 ```
 <cfoutput>
 
@@ -68,8 +70,8 @@ Never directly output a dynamic variables.
 </script>
 
 </cfoutput>
-
 ```
+
 There can be exceptions, but they must only output variables that have a strong chain of custody.
 
 This is restricted to variables that cannot be passed into the request dynamically. 
@@ -84,7 +86,7 @@ The most common example if outputting the body of a content node.
 </cfoutput>
 ```
 
-##CUSTOM ENDPOINTS
+## CUSTOM ENDPOINTS
 
 When adding custom url endpoints like proxy cfc place them under siteid either named remote.cfc under a directory named remote.  
 This will prevent hackers from exploring urls looking files that were never intended to be directory accessed like includes.
