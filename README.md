@@ -90,3 +90,23 @@ The most common example if outputting the body of a content node.
 
 When adding custom url endpoints like proxy cfc place them under siteid either named remote.cfc under a directory named remote.  
 This will prevent hackers from exploring urls looking files that were never intended to be directory accessed like includes.
+
+It preferred way to add custom endpoint is to add model/bean/apihelper.cfc to your theme, content_type or display object/module directory and add a remote function:
+
+{module_dir}/model/beans/apihelper.cfc
+
+```
+component extends="mura.bean.bean" {
+  
+  remote function heyThere(){
+    return "Hello!";
+  }
+
+}
+```
+
+Accessed with:
+
+http://domain.com/index.cfm/_api/json/v1/{siteid}/apihelper/heythere
+
+
