@@ -96,7 +96,8 @@ The most common example if outputting the body of a content node.
 
 
 	```
-	{module_dir}/model/beans/apihelper.cfc
+	//{module_dir}/model/beans/apihelper.cfc
+	
 	component extends="mura.bean.bean" {
 
 	  remote function heyThere(){
