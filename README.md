@@ -5,6 +5,10 @@ Server environments will vary, as will security policies, and additional securit
 
 ## Coding Guidelines
 
+### Mura ORM
+
+1. In general, it is best to use Mura ORM for entity state management and querying.
+
 ### SQL Queries
 
 1. Always param all queries variables.
