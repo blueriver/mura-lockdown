@@ -50,9 +50,9 @@ rs=qs.execute(sql="select * from example where id = :id").getResult();
 
 <a href="?myvar=#esapiEncode('url',session.myvar)#">My Link</link>
 
-<script>
+<cfscript>
     myvar="#esapiEncode('javascript',session.myvar)#"
-</script>
+</cfscript>
 
 </cfoutput>
 ```
@@ -68,9 +68,9 @@ rs=qs.execute(sql="select * from example where id = :id").getResult();
 
 <a href="?myvar=#session.myvar#">My Link</link>
 
-<script>
+<cfscript>
     myvar="#session.myvar#"
-</script>
+</cfscript>
 
 </cfoutput>
 ```
